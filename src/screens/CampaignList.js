@@ -1,6 +1,7 @@
 // src/screens/CampaignList.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import Header from '../components/Header';
 import DonationCard from '../components/DonationCard';
 import { db } from '../services/firebase';
 import { collection, getDocs } from 'firebase/firestore';
@@ -30,17 +31,23 @@ const CampaignList = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Active Campaigns</Text>
-      
-      <FlatList
-        data={campaigns}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <DonationCard campaign={item} />
-        )}
-        contentContainerStyle={styles.listContent}
+    <View style={{ flex: 1 }}>
+      <Header 
+        title="Active Campaigns" 
+        showBack={false}
       />
+      <View style={styles.container}>
+        <Text style={styles.header}>Active Campaigns</Text>
+        
+        <FlatList
+          data={campaigns}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <DonationCard campaign={item} />
+          )}
+          contentContainerStyle={styles.listContent}
+        />
+      </View>
     </View>
   );
 };
