@@ -63,20 +63,20 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <div className="flex items-center space-x-3">
-          <select className="input-field w-auto">
+    <div className="space-y-10 max-w-7xl mx-auto px-4 py-10">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+        <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">Dashboard</h1>
+        <div className="flex items-center gap-3">
+          <select className="input-field w-auto px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500">
             <option>Last 7 days</option>
             <option>Last 30 days</option>
             <option>Last 90 days</option>
           </select>
         </div>
       </div>
-      
+
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
         <StatCard
           title="Total Raised"
           value={`$${totalRaised.toLocaleString()}`}
@@ -112,13 +112,13 @@ const Dashboard = () => {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {/* Donation Trend Chart */}
         <div className="card">
-          <div className="p-6 border-b">
-            <h2 className="text-lg font-semibold text-gray-900">Donation Trends</h2>
+          <div className="p-8 border-b">
+            <h2 className="text-xl font-bold text-gray-900">Donation Trends</h2>
           </div>
-          <div className="p-6">
+          <div className="p-8">
             <div className="h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={donationTrendData}>
@@ -141,10 +141,10 @@ const Dashboard = () => {
 
         {/* Campaign Performance Chart */}
         <div className="card">
-          <div className="p-6 border-b">
-            <h2 className="text-lg font-semibold text-gray-900">Campaign Performance</h2>
+          <div className="p-8 border-b">
+            <h2 className="text-xl font-bold text-gray-900">Campaign Performance</h2>
           </div>
-          <div className="p-6">
+          <div className="p-8">
             <div className="h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={campaignPerformanceData}>
@@ -162,13 +162,13 @@ const Dashboard = () => {
       </div>
 
       {/* Bottom Section */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {/* Donation Sources */}
         <div className="card">
-          <div className="p-6 border-b">
-            <h2 className="text-lg font-semibold text-gray-900">Donation Sources</h2>
+          <div className="p-8 border-b">
+            <h2 className="text-xl font-bold text-gray-900">Donation Sources</h2>
           </div>
-          <div className="p-6">
+          <div className="p-8">
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -195,24 +195,24 @@ const Dashboard = () => {
 
         {/* Recent Activity */}
         <div className="card">
-          <div className="p-6 border-b">
-            <h2 className="text-lg font-semibold text-gray-900">Recent Activity</h2>
+          <div className="p-8 border-b">
+            <h2 className="text-xl font-bold text-gray-900">Recent Activity</h2>
           </div>
-          <div className="p-6">
+          <div className="p-8">
             <div className="space-y-4">
               {donations.slice(-5).reverse().map(donation => {
                 const campaign = campaigns.find(c => c.id === donation.campaignId);
                 return (
-                  <div key={donation.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div key={donation.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl shadow-sm">
                     <div className="flex items-center">
                       <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
                       <div>
-                        <p className="text-sm font-medium text-gray-900">{donation.donor}</p>
+                        <p className="text-sm font-semibold text-gray-900">{donation.donor}</p>
                         <p className="text-xs text-gray-500">donated to {campaign?.title}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-medium text-gray-900">${donation.amount}</p>
+                      <p className="text-sm font-semibold text-gray-900">${donation.amount}</p>
                       <p className="text-xs text-gray-500">{donation.date}</p>
                     </div>
                   </div>

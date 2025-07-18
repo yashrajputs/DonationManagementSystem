@@ -87,6 +87,13 @@ const appReducer = (state, action) => {
         ...state,
         donations: [...state.donations, { ...action.payload, id: Date.now() }]
       };
+    case 'UPDATE_DONOR':
+      return {
+        ...state,
+        donors: state.donors.map(
+          d => d.id === action.payload.id ? action.payload : d
+        )
+      };
     default:
       return state;
   }
@@ -109,3 +116,4 @@ export const useApp = () => {
   }
   return context;
 };
+export default AppContext;

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useApp } from './context/AppContext';
 import AuthForm from './components/Auth/AuthForm';
-import Header from './components/Layout/Header';
-import Navigation from './components/Layout/Navigation';
+import MainLayout from './components/Layout/MainLayout';
 import Dashboard from './components/Dashboard/Dashboard';
 import CampaignManagement from './components/Campaigns/CampaignManagement';
 import DonationProcessing from './components/Donations/DonationProcessing';
 import Reports from './components/Reports/Reports';
+import Donors from "./components/Donors/Donors";
+import Settings from "./components/Settings/Settings";
 
 const AppContent = () => {
   const { state, dispatch } = useApp();  // add dispatch here
@@ -23,9 +24,9 @@ const AppContent = () => {
       case 'reports':
         return <Reports />;
       case 'donors':
-        return <div className="p-8">Donors page coming soon...</div>;
+        return <Donors />;
       case 'settings':
-        return <div className="p-8">Settings page coming soon...</div>;
+        return <Settings />;
       default:
         return <Dashboard />;
     }
@@ -41,17 +42,9 @@ const AppContent = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      <div className="flex">
-        <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
-        <div className="flex-1 ml-64 pt-16">
-          <div className="p-8">
-            {renderPage()}
-          </div>
-        </div>
-      </div>
-    </div>
+    <MainLayout currentPage={currentPage} setCurrentPage={setCurrentPage}>
+      {renderPage()}
+    </MainLayout>
   );
 };
 export default AppContent;
